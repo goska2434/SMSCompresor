@@ -1,5 +1,9 @@
 
 
+import compresor.Compresor;
+import compresor.NaiveCompresor;
+import compresor.OptimalCompresor;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -24,13 +28,13 @@ public class Main {
         switch (typeOfCompressor){
             case "n": compressor = new NaiveCompresor();
                 break;
-         //  case "o": compressor = new OptimalCompresor();
-               // break;
+           case "o": compressor = new OptimalCompresor();
+                break;
             default: throw new IllegalArgumentException();
         }
 
-        String compressedMessage = compressor.compress(text);
-        String[] paginatedMessage = paginator.paginate(compressedMessage);
+        Object compressedMessage = compressor.compress(text);
+        String[] paginatedMessage = paginator.paginate(compressedMessage.toString());
         System.out.println("Your codded and splited message: " + Arrays.toString(paginatedMessage));
         System.out.println("Cost of your message(s): " + calculator.calculate(paginatedMessage.length));
     }
